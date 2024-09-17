@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 import ProductCard from '../../components/elments/ProductCard'
 import FilterBar from './components/FilterBar'
 import axios from 'axios';
+import { useFilter } from '../../bookContext/filterContext';
 
 const Products = () => {
+  const {products,initProductList} = useFilter()
   const [showFilterBar,setShowFilterBar] = useState(false);
-  const [products,setProducts] = useState([]);
+  // const [products,setProducts] = useState([]);
 
   useEffect(()=>{
     axios.get(`${process.env.REACT_APP_API_URL}products`).then((response)=>{
-      setProducts(response.data);
+      // setProducts(response.data);
+      initProductList(response.data)
     })
 
   },[])
@@ -34,7 +37,7 @@ const Products = () => {
           </div>  
         </section>
        {
-        showFilterBar && <FilterBar setShowFilterBar ={setShowFilterBar}/>
+        (showFilterBar) ? <FilterBar setShowFilterBar ={setShowFilterBar} showFilterBar={showFilterBar}/>:''
        } 
       </main> 
   )

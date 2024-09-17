@@ -6,6 +6,7 @@ import Cart from '../screens/cart/Cart';
 import Dashboard from '../screens/dashboard/Dashboard';
 import Products from '../screens/products/Products';
 import ProductDetails from '../screens/ProductDetails';
+import { FilterProvider } from '../bookContext/filterContext';
 const routes = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<App/>}>
     <Route path='/' element={<Home/>}/>
@@ -17,7 +18,9 @@ const routes = createBrowserRouter(createRoutesFromElements(
 ))
 const Routes = () => {
   return (
+    <FilterProvider>
     <RouterProvider router={routes} />
+    </FilterProvider>
   )
 }
 

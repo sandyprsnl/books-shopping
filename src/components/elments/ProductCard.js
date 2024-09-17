@@ -1,9 +1,11 @@
 import React from 'react'
-import book1 from '../../assets/images/book1.jpg'
 import Rating from './Rating';
 import { NavLink } from 'react-router-dom';
+import { useFilter } from '../../bookContext/filterContext';
 const ProductCard = ({ product }) => {
-  const { id, name, overview, long_description, price, poster, image_local, rating, in_stock, size, best_seller } = product;
+  console.log(useFilter());
+  // const { id, name, overview, long_description, price, poster, image_local, rating, in_stock, size, best_seller } = product;
+  const { id, name, overview, price, poster, rating, best_seller } = product;
   return (
     <div className="m-4 max-w-xs  rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <NavLink to={`/products/${id}`} className="relative" >
