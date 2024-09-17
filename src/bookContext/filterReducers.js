@@ -4,15 +4,14 @@ const filterReducers = (state, action) => {
         case 'PRODUCT_LIST':
             return { products: payload.products }
         case 'SORT_BY':
-            return
+            return {...state,sortBy:payload.sortBy}
         case 'RATINGS':
             return
         case 'BEST_SELLER_ONLY':
-            return
+            return  {...state ,bestSellerOnly: payload.bestSellerOnly }
 
         case 'ONLY_IN_STOCK':
-            return
-
+            return  {...state ,onlyInStock: payload.onlyInStock }
 
         default:
             break;

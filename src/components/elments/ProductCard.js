@@ -1,9 +1,7 @@
 import React from 'react'
 import Rating from './Rating';
 import { NavLink } from 'react-router-dom';
-import { useFilter } from '../../bookContext/filterContext';
 const ProductCard = ({ product }) => {
-  console.log(useFilter());
   // const { id, name, overview, long_description, price, poster, image_local, rating, in_stock, size, best_seller } = product;
   const { id, name, overview, price, poster, rating, best_seller } = product;
   return (

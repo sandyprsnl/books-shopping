@@ -26,10 +26,28 @@ export const FilterProvider = ({ children }) => {
 
             })
     }
-    console.log(state);
+    
+    const bestSellerOnly = (products)=>{
+       return (state.bestSellerOnly)? products.filter((product)=>product.best_seller===true ):products;
+    }
+    const onlyInStock=(products)=>{
+        return (state.onlyInStock)?products.filter((product)=>product.in_stock===true):products;
+    }
+    const sortBy=(products)=>{
+        if(state.sortBy==="lowToHigh"){
+            return products.sort((a,b)=>a.price-b.price);
+        }
+        if(state.sortBy==="heighToLow"){
+            return products.sort((a,b)=>b.price-a.price);
+        }
+        return products;
+    }
+    const filteredList = sortBy(onlyInStock(bestSellerOnly(state.products)));
     const value = {
-        products: state.products,
-        initProductList
+        products: filteredList,
+        initProductList,
+        state,
+        dispatch
     }
     return (
         <filterContext.Provider value={value}>
