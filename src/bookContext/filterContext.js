@@ -42,7 +42,22 @@ export const FilterProvider = ({ children }) => {
         }
         return products;
     }
-    const filteredList = sortBy(onlyInStock(bestSellerOnly(state.products)));
+    const rating = (products)=>{
+            if(state.rating==="1STARANDABOVE"){
+                return products.filter((product)=>product.rating>=1);
+            }
+            if(state.rating==="2STARANDABOVE"){
+                return products.filter((product)=>product.rating>=2);
+            }
+            if(state.rating==="3STARANDABOVE"){
+                return products.filter((product)=>product.rating>=3);
+            }
+            if(state.rating==="4STARANDABOVE"){
+                return products.filter((product)=>product.rating>=4);
+            }
+        return products;
+    }
+    const filteredList = rating(sortBy(onlyInStock(bestSellerOnly(state.products))));
     const value = {
         products: filteredList,
         initProductList,

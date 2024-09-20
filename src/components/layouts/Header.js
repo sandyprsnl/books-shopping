@@ -1,12 +1,12 @@
 
-import {Dropdown, Navbar } from "flowbite-react";
+import { Navbar } from "flowbite-react";
 import { PiMoonStarsFill } from "react-icons/pi";
 import { IoMdSunny } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
-import { FaUserAlt } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { NotLoggedInNavDropdown } from "../elments/NotLoggedInNavDropdown";
 
 
 const Header = ({showSearch,setShowSearch}) => {
@@ -44,24 +44,7 @@ useEffect(()=>{
         <span className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-4 -end-4 dark:border-gray-900">20</span>
         </span> </NavLink>
         <div className="">
-        <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Navbar.Link href="#"><FaUserAlt className="w-6 h-6" /></Navbar.Link>
-
-          }
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
-          </Dropdown.Header>
-          <Dropdown.Item><NavLink to={'/dashboard'} className={({isActive})=>isActive?activeClass:inActiveClass}>Dashboard</NavLink>   </Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
-        </Dropdown>
+        <NotLoggedInNavDropdown activeClass={activeClass} inActiveClass={inActiveClass}/>
       </div>
       </Navbar.Collapse>
     </Navbar>

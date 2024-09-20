@@ -7,6 +7,8 @@ import Dashboard from '../screens/dashboard/Dashboard';
 import Products from '../screens/products/Products';
 import ProductDetails from '../screens/ProductDetails';
 import { FilterProvider } from '../bookContext/filterContext';
+import Register from '../screens/Register';
+import Login from '../screens/Login';
 const routes = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<App/>}>
     <Route path='/' element={<Home/>}/>
@@ -14,6 +16,8 @@ const routes = createBrowserRouter(createRoutesFromElements(
     <Route path='products' element={<Products/>}/>
     <Route path='dashboard' element={<Dashboard/>}/>
     <Route path='products/:id' element={<ProductDetails/>}/>
+    <Route path='register' element={<Register/>}/>
+    <Route path='login' element={<Login/>} />
     </Route>
 ))
 const Routes = () => {
