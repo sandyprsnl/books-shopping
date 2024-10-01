@@ -15,7 +15,7 @@ const Products = () => {
       initProductList(response.data)
     })
 
-  },[])
+  },[initProductList])
   return (
     <main>
         <section className="my-5">
