@@ -5,6 +5,7 @@ import Header from './components/layouts/Header';
 import Search from './components/sections/Search';
 import { ScrollToTop } from './components/others/ScrollToTop';
 import { useLocation } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
 function App() {
   const location = useLocation();
   let ignoreflex= ['/login','/register'];
@@ -16,6 +17,7 @@ if(ignoreflex.includes(location.pathname)){
   return (
     <main className="dark:bg-slate-800">
     <ScrollToTop/>
+    <ToastContainer />
       <Header setShowSearch={setShowSearch} showSearch={showSearch}/>
       {showSearch && <Search/>}
       <section className={classes}>      

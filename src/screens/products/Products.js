@@ -3,19 +3,23 @@ import ProductCard from '../../components/elments/ProductCard'
 import FilterBar from './components/FilterBar'
 import axios from 'axios';
 import { useFilter } from '../../bookContext/filterContext';
+import { useSearchParams } from 'react-router-dom';
 
 const Products = () => {
   const {products,initProductList} = useFilter()
   const [showFilterBar,setShowFilterBar] = useState(false);
   // const [products,setProducts] = useState([]);
+  const [searchParms , setSearchParms] = useSearchParams();
 
   useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_API_URL}products`).then((response)=>{
+    let searchQuery = searchParms.get('search');
+    const url = searchQuery?`${process.env.REACT_APP_API_URL}products?q=${searchQuery}`:`${process.env.REACT_APP_API_URL}products`;
+    axios.get(url).then((response)=>{
       // setProducts(response.data);
       initProductList(response.data)
     })
 
-  },[initProductList])
+  },[])
   return (
     <main>
         <section className="my-5">

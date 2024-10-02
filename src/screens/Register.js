@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Register = () => {
-
+  const navigator = useNavigate();
   async function registerUser(e){
     e.preventDefault();
     let name = e.target.name.value;
@@ -22,7 +24,7 @@ const Register = () => {
     };
     const response = await fetch(`${process.env.REACT_APP_API_URL}register`,config);
     const data = await response.json()
-    console.log(data);
+    data.accessToken ? navigator('/products'):toast.error(data);
   }
   return (
     <main>

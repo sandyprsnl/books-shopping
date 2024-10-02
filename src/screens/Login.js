@@ -1,6 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import {  toast } from 'react-toastify';
 
 const Login = () => {
+  const navigator = useNavigate();
 
   async function login(e){
     e.preventDefault();
@@ -20,7 +23,8 @@ const Login = () => {
         )
       };
     const response = await fetch(`${process.env.REACT_APP_API_URL}login`,config);
-    console.log(response);
+    const data = await response.json();
+    data.accessToken ?navigator('/products') : toast.error(data);
   }
   return (
     <main>
