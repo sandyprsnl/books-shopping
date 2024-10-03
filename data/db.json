@@ -245,21 +245,10 @@
   "orders": [],
   "users": [
     {
-      "email": "sandeep@mail.com",
-      "password": "$2a$10$TXZReU1E4H0Xdpnyuiqe9.sEUIXuXhnZE.ezfDDE7zGwgGPguZJti",
-      "id": 1
-    },
-    {
-      "email": "sandeep@gmail.comm",
-      "password": "$2a$10$sup.bOdfkIslG.ISTgO4qefpPhkO50HvbzpvsylK56t7EGFJ6ZQje",
+      "email": "sandeep@gmail.com",
+      "password": "$2a$10$Ae4fyppomfCU0HtzC6MMeekjK0FPBukqOvmve7bh4BDJfGAiROYOG",
       "name": "sandeep",
-      "id": 2
-    },
-    {
-      "email": "a@gmail.com",
-      "password": "$2a$10$6pYpeI2hDFwC.P6VReIq1eakAPdm.NVOFxD.s0RFtx2IaOC/Mp73.",
-      "name": "a",
-      "id": 3
+      "id": 1
     }
   ]
 }

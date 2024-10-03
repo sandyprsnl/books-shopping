@@ -7,6 +7,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NotLoggedInNavDropdown } from "../elments/NotLoggedInNavDropdown";
+import { LoggedInNavDropdown } from "../elments/LoggedInNavDropdown";
 
 
 const Header = ({showSearch,setShowSearch}) => {
@@ -44,7 +45,13 @@ useEffect(()=>{
         <span className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-4 -end-4 dark:border-gray-900">20</span>
         </span> </NavLink>
         <div className="">
-        <NotLoggedInNavDropdown activeClass={activeClass} inActiveClass={inActiveClass}/>
+        {
+          (JSON.parse(sessionStorage.getItem('token')))?
+          <LoggedInNavDropdown activeClass={activeClass} inActiveClass={inActiveClass}/>
+          :
+          ( <NotLoggedInNavDropdown activeClass={activeClass} inActiveClass={inActiveClass}/>)
+        }
+       
       </div>
       </Navbar.Collapse>
     </Navbar>

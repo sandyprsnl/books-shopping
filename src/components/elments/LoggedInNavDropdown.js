@@ -17,6 +17,7 @@ export const LoggedInNavDropdown = ({activeClass,inActiveClass}) => {
     </Dropdown.Header>
     <Dropdown.Item><Link to={'/products'}>All Products</Link>   </Dropdown.Item>
     <Dropdown.Item><Link to={'/dashboard'}>Dashboard</Link></Dropdown.Item>
+    <Dropdown.Item><Link onClick={()=>{sessionStorage.removeItem('token');sessionStorage.removeItem('cbid')}}>Log out</Link></Dropdown.Item>
   </Dropdown>
   )
 }
