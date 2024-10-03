@@ -9,7 +9,8 @@ import { ToastContainer } from 'react-toastify';
 function App() {
   const location = useLocation();
   let ignoreflex= ['/login','/register'];
-  let classes = 'max-w-screen-xl flex flex-wrap mx-auto px-6';
+  // let classes = 'max-w-screen-xl flex flex-wrap mx-auto px-6';
+  let classes = 'max-w-screen-xl mx-auto px-6';
 if(ignoreflex.includes(location.pathname)){
   classes='max-w-screen-xl  mx-auto px-6';
 }

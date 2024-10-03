@@ -24,9 +24,9 @@ useEffect(()=>{
                 <span className="mr-1">$</span>
                 <span className="">{price}</span>
               </p>
-              <p className="my-3"> 
+              <div className="my-3"> 
               <Rating rating={rating}/>
-              </p>
+              </div>
               <p className="my-4 select-none">
               {best_seller && <span className="font-semibold text-amber-500 border bg-amber-50 rounded-lg px-3 py-1 mr-2">BEST SELLER</span>}
                   {in_stock ? ( <span className="font-semibold text-emerald-600	border bg-slate-100 rounded-lg px-3 py-1 mr-2">INSTOCK</span>):(<span className="font-semibold text-rose-700 border bg-slate-100 rounded-lg px-3 py-1 mr-2">OUT OF STOCK</span>)} 
