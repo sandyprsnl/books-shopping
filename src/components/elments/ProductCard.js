@@ -1,9 +1,11 @@
 import React from 'react'
 import Rating from './Rating';
 import { NavLink } from 'react-router-dom';
+import { useCart } from '../../bookContext/CartContext';
 const ProductCard = ({ product }) => {
   // const { id, name, overview, long_description, price, poster, image_local, rating, in_stock, size, best_seller } = product;
   const { id, name, overview, price, poster, rating, best_seller } = product;
+  const {dispatch} = useCart();
   return (
     <div className="m-4 max-w-xs  rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <NavLink to={`/products/${id}`} className="relative" >
@@ -26,7 +28,16 @@ const ProductCard = ({ product }) => {
           </span>
         </p>
         
-        <button className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>
+        <button onClick={()=>{
+          dispatch({
+            type:'ADD_TO_CART',
+            payload:{
+              product:product
+            }
+          }
+            
+          )
+        }} className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>
         
           {/* <button className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800">Remove Item <i className="ml-1 bi bi-trash3"></i></button> */}
       </div>
