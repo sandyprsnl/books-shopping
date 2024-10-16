@@ -8,7 +8,7 @@ const CartCard = ({product}) => {
   return (
     <div className="flex flex-wrap justify-between border-b dark:border-slate-700 max-w-4xl m-auto p-2 mb-5 ">
     <div className="flex">
-        <NavLink to={`products/${id}`}>
+        <NavLink to={`/products/${id}`}>
           <img className="w-32 rounded" src={poster} alt={name} />
         </NavLink>
         <div className="">

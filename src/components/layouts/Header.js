@@ -8,10 +8,12 @@ import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NotLoggedInNavDropdown } from "../elments/NotLoggedInNavDropdown";
 import { LoggedInNavDropdown } from "../elments/LoggedInNavDropdown";
+import { useCart } from "../../bookContext/CartContext";
 
 
 const Header = ({showSearch,setShowSearch}) => {
   var [darkTheme,setDarkTheme]=useState(localStorage.getItem('darkTheme')|| false);
+  const {products:productsInCart} = useCart();
   function updateTheme(){
     setDarkTheme(!darkTheme);
     localStorage.setItem('darkTheme',!darkTheme);
@@ -42,7 +44,8 @@ useEffect(()=>{
         
         <NavLink to="/cart" className={({isActive})=>isActive?activeClass:inActiveClass}> <span className="relative">
         <FaShoppingCart className="w-6 h-6" />
-        <span className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-4 -end-4 dark:border-gray-900">20</span>
+        {productsInCart.length>0 && 
+          <span className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-4 -end-4 dark:border-gray-900">{productsInCart.length}</span>}
         </span> </NavLink>
         <div className="">
         {
