@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Rating from '../components/elments/Rating';
 import { useCart } from '../bookContext/CartContext';
-import { type } from '@testing-library/user-event/dist/type';
 
 const ProductDetails = () => {
 const {id} = useParams();
@@ -13,6 +12,10 @@ const { id:pid, name, overview, long_description, price, poster, rating, in_stoc
 var [productIsInCart,setProductIsInCart] = useState(false);
 useEffect(()=>{
   axios.get(`${process.env.REACT_APP_API_URL}products/${id}`).then((response)=>{setProduct(response.data)});
+
+},[id]);
+
+useEffect(()=>{
   let findProductInCart = cartProducts.find((cartProduct)=>{
     console.log(cartProduct,product);
     return cartProduct.id ===product.id;
@@ -23,8 +26,8 @@ useEffect(()=>{
   }else{
     setProductIsInCart(false);
   }
-
-},[id,cartProducts]);
+  
+},[cartProducts,product.id])
 
   return (
     <main id={pid} className={in_stock?'':'grayscale'}>
@@ -57,7 +60,7 @@ useEffect(()=>{
                     product:product
                   }
                 })
-              }} className={`inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800`}>Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>
+              }} className={`inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ${ in_stock ? "" : "cursor-not-allowed" }`}>Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>
               :
               <button onClick={()=>{
                 dispatch({

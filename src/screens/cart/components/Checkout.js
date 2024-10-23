@@ -1,4 +1,28 @@
-export const Checkout = ({showCheckout}) => {
+import { useEffect, useState } from "react"
+
+export const Checkout = ({showCheckout,totalAmount}) => {
+    var [userdata,setUserData] =useState({});
+
+    useEffect(()=>{
+        const token = JSON.parse(sessionStorage.getItem('token'));
+        const cbid = sessionStorage.getItem('cbid');
+
+        async function getUser(){
+            
+            const response = await fetch(`${process.env.REACT_APP_API_URL}600/users/${cbid}`,
+                {method:"GET",
+                    headers:{
+                        "Content-type":"application/json",
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+
+            );
+            const data = await response.json();
+            setUserData(data)
+        };
+        getUser()
+    },[]);
     return (
       <section>
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
@@ -18,11 +42,11 @@ export const Checkout = ({showCheckout}) => {
                       <form className="space-y-6" >
                       <div>
                           <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name:</label>
-                          <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="Shubham Sarda" disabled required="" />
+                          <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={userdata.name} disabled required="" />
                       </div>
                       <div>
                           <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email:</label>
-                          <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="shubham@example.com" disabled required="" />
+                          <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={userdata.email} disabled required="" />
                       </div>
                       <div>
                           <label htmlFor="card" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Card Number:</label>
@@ -38,7 +62,7 @@ export const Checkout = ({showCheckout}) => {
                           <input type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="523" disabled required="" />
                       </div>
                       <p className="mb-4 text-2xl font-semibold text-lime-500 text-center">
-                          $99
+                          ${totalAmount}
                       </p>
                       <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" >
                           <i className="mr-2 bi bi-lock-fill"></i>PAY NOW
