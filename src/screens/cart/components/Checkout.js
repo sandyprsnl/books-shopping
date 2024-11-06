@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react"
+import { useCart } from "../../../bookContext/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export const Checkout = ({showCheckout,totalAmount}) => {
-    var [userdata,setUserData] =useState({});
-
+    var [userdata,setUserData] =useState({});    
+    const {products:cartList,dispatch} = useCart();
+    const navigate = useNavigate();
+    const token = JSON.parse(sessionStorage.getItem('token'));
+    const cbid = sessionStorage.getItem('cbid');
     useEffect(()=>{
-        const token = JSON.parse(sessionStorage.getItem('token'));
-        const cbid = sessionStorage.getItem('cbid');
+        
 
         async function getUser(){
             
@@ -23,6 +27,39 @@ export const Checkout = ({showCheckout,totalAmount}) => {
         };
         getUser()
     },[]);
+    async function PayNowHandler(e){
+        e.preventDefault()
+        try{
+        const order = {
+            cartList:cartList,
+            amount_paid:totalAmount,
+            total_products:cartList.length,
+            user :{
+                name:userdata.name,
+                email:userdata.email,
+                id:userdata.id
+            }
+        }
+        const response = await fetch(`${process.env.REACT_APP_API_URL}660/orders`,
+           { method:'POST',
+            headers:{
+                "Content-type":"application/json",
+                Authorization: `Bearer ${token}`,                
+            },
+            body:JSON.stringify(order)
+        }
+        );
+        const data = await response.json();
+        dispatch({
+            type:"CLEAR_CART",
+        });
+        navigate('/order-summery',{state:{status:true,data:data}});
+
+    }catch(error){
+        navigate('/order-summery',{state:{status:false}});
+    }
+        
+    }
     return (
       <section>
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
@@ -39,14 +76,14 @@ export const Checkout = ({showCheckout,totalAmount}) => {
                       <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                       <i className="bi bi-credit-card mr-2"></i>CARD PAYMENT
                       </h3>
-                      <form className="space-y-6" >
+                      <form className="space-y-6" onSubmit={PayNowHandler}>
                       <div>
                           <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name:</label>
-                          <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={userdata.name} disabled required="" />
+                          <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={userdata.name || ''} disabled required="" />
                       </div>
                       <div>
                           <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email:</label>
-                          <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={userdata.email} disabled required="" />
+                          <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={userdata.email || ''} disabled required="" />
                       </div>
                       <div>
                           <label htmlFor="card" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Card Number:</label>

@@ -11,10 +11,12 @@ import { CartProvider } from '../bookContext/CartContext';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import { ProtectedRoute } from './ProtectedRoute';
+import Order from '../screens/orders/Order';
 const routes = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<App/>}>
     <Route path='/' element={<Home/>}/>
     <Route path='cart' element={<ProtectedRoute><Cart/></ProtectedRoute>}/>
+    <Route path='order-summery' element={<ProtectedRoute><Order/></ProtectedRoute>}/>
     <Route path='products' element={<Products/>}/>
     <Route path='dashboard' element={<Dashboard/>}/>
     <Route path='products/:id' element={<ProductDetails/>}/>
