@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const OrderSuccess = ({data}) => {
-  const {user} = data;
+  const {id,user} = data;
   return (
     <section className="text-xl text-center max-w-4xl mx-auto my-10 py-5 dark:text-slate-100 border dark:border-slate-700 rounded">
         <div className="my-5">
             <p className="bi bi-check-circle text-green-600 text-7xl mb-5"></p>
             <p>Thank you {user.name} for the order!</p>
-            <p>Your Order ID: {user.id}</p>          
+            <p>Your Order ID: {id}</p>          
         </div>
         <div className="my-5">
             <p>Your order is confirmed.</p>

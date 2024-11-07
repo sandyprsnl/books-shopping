@@ -4,8 +4,8 @@ import OrderFails from './components/OrderFails';
 import { useLocation } from 'react-router-dom';
 
 const Order = () => {
-  const {state} = useLocation();
-  console.log(state);
+  const location = useLocation()
+  const state = location.state||{};
   return (
     <main>
     {

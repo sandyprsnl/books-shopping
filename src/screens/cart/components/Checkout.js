@@ -34,6 +34,7 @@ export const Checkout = ({showCheckout,totalAmount}) => {
             cartList:cartList,
             amount_paid:totalAmount,
             total_products:cartList.length,
+            order_date: Date.now(),
             user :{
                 name:userdata.name,
                 email:userdata.email,
