@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const DashboardCard = ({order}) => {
     const date= new Date(order.order_date);
