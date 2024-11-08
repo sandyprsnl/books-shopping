@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { registerService, setSessionData } from '../services';
 
 const Register = () => {
   const navigator = useNavigate();
@@ -10,23 +11,10 @@ const Register = () => {
     let email = e.target.email.value;
     let password = e.target.password.value;
 
-    const config = {
-      method: 'POST',
-      headers: {
-        Accept: "application/json",
-        'Content-type': "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password
-      })
-    };
-    const response = await fetch(`${process.env.REACT_APP_API_URL}register`, config);
-    const data = await response.json()
+    const data = await registerService({name,email,password});
     if (data.accessToken) {
-      sessionStorage.setItem('token',JSON.stringify(data.accessToken));
-      sessionStorage.setItem('cbid',data.user.id);
+     
+      setSessionData(data);
       navigator('/products');
     } else {
       toast.error(data)

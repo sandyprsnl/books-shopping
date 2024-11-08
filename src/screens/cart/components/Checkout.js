@@ -1,34 +1,22 @@
 import { useEffect, useState } from "react"
 import { useCart } from "../../../bookContext/CartContext";
 import { useNavigate } from "react-router-dom";
+import { getSessionData, getUserDataService } from "../../../services";
 
 export const Checkout = ({showCheckout,totalAmount}) => {
     var [userdata,setUserData] =useState({});    
     const {products:cartList,dispatch} = useCart();
     const navigate = useNavigate();
-    const token = JSON.parse(sessionStorage.getItem('token'));
-    const cbid = sessionStorage.getItem('cbid');
-    useEffect(()=>{
-        
-
-        async function getUser(){
-            
-            const response = await fetch(`${process.env.REACT_APP_API_URL}600/users/${cbid}`,
-                {method:"GET",
-                    headers:{
-                        "Content-type":"application/json",
-                        Authorization: `Bearer ${token}`,
-                    }
-                }
-
-            );
-            const data = await response.json();
+    useEffect(()=>{  
+            async function getUser(){            
+            const data = await getUserDataService();
             setUserData(data)
         };
         getUser()
     },[]);
     async function PayNowHandler(e){
         e.preventDefault()
+        let token = getSessionData().token; 
         try{
         const order = {
             cartList:cartList,

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { NotLoggedInNavDropdown } from "../elments/NotLoggedInNavDropdown";
 import { LoggedInNavDropdown } from "../elments/LoggedInNavDropdown";
 import { useCart } from "../../bookContext/CartContext";
+import { getSessionData } from "../../services";
 
 
 const Header = ({showSearch,setShowSearch}) => {
@@ -49,7 +50,7 @@ useEffect(()=>{
         </span> </NavLink>
         <div className="">
         {
-          (JSON.parse(sessionStorage.getItem('token')))?
+          (getSessionData().token)?
           <LoggedInNavDropdown activeClass={activeClass} inActiveClass={inActiveClass}/>
           :
           ( <NotLoggedInNavDropdown activeClass={activeClass} inActiveClass={inActiveClass}/>)
