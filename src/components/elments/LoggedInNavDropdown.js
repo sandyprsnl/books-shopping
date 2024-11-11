@@ -1,13 +1,18 @@
 import {Dropdown, Navbar } from "flowbite-react";
 import { FaUserAlt } from "react-icons/fa";
 import {Link} from "react-router-dom";
-import { getUserDataService, logoutService } from "../../services";
+import { getUserDataService, logoutService, showError } from "../../services";
 import { useEffect, useState } from "react";
 export const LoggedInNavDropdown = ({activeClass,inActiveClass}) => {
   let [user,setUser]= useState({});
   useEffect(()=>{
     (async ()=>{
-      const data = await getUserDataService();
+      let data ={};
+      try {          
+      data = await getUserDataService();
+      } catch (error) {
+        showError(error.message);
+      }
       setUser(data);
     })()
   },[]);

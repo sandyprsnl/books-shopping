@@ -17,10 +17,8 @@ useEffect(()=>{
 
 useEffect(()=>{
   let findProductInCart = cartProducts.find((cartProduct)=>{
-    console.log(cartProduct,product);
     return cartProduct.id ===product.id;
   } );
-  console.log(findProductInCart,cartProducts);
   if(findProductInCart){
     setProductIsInCart(true);
   }else{

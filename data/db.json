@@ -316,6 +316,12 @@
       "password": "$2a$10$SpskZw/028KtZOaT/5136eOqrLKLV5Z8r6707UdJ.2jxR7i4a7PGG",
       "name": "admin",
       "id": 2
+    },
+    {
+      "email": "a@g.c",
+      "password": "$2a$10$iNe1UaFaP6FW6Vbtghr2GewCXoQxu6shBo/nrlZkNDuUubU.aprRy",
+      "name": "admin",
+      "id": 3
     }
   ]
 }

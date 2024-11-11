@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
-import { loginService, setSessionData } from '../services';
+import { loginService, setSessionData, showError } from '../services';
 const Login = () => {
   const email = useRef();
   const password = useRef()
@@ -9,7 +9,12 @@ const Login = () => {
 
   async function login(e){
     e.preventDefault();
-    let data =  await loginService({email,password});
+    let data =  {};
+    try {
+      data =  await loginService({email,password});
+    } catch (error) {
+      showError(error.message);
+    }
     if(data.accessToken){
       setSessionData(data);
       navigator('/products');

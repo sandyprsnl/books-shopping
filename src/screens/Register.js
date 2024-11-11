@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { registerService, setSessionData } from '../services';
+import { registerService, setSessionData, showError } from '../services';
 
 const Register = () => {
   const navigator = useNavigate();
@@ -9,9 +9,13 @@ const Register = () => {
     e.preventDefault();
     let name = e.target.name.value;
     let email = e.target.email.value;
-    let password = e.target.password.value;
-
-    const data = await registerService({name,email,password});
+    let password = e.target.password.value;    
+    let data={};
+    try {
+       data = await registerService({name,email,password});
+    } catch (error) {
+      showError(error.message);
+    }
     if (data.accessToken) {
      
       setSessionData(data);
