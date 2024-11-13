@@ -12,6 +12,7 @@ export function setSessionData(data){
     sessionStorage.setItem('cbid',cbid);
 }
 export async function loginService({email,password}){
+  console.log(email)
     const config = {
         method:'post',
         headers:{
@@ -20,8 +21,8 @@ export async function loginService({email,password}){
         },
         body:JSON.stringify(
           {
-            email:email.current.value,
-            password:password.current.value
+            "email":email,
+            "password":password
           }
         )
       };

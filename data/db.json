@@ -322,6 +322,12 @@
       "password": "$2a$10$iNe1UaFaP6FW6Vbtghr2GewCXoQxu6shBo/nrlZkNDuUubU.aprRy",
       "name": "admin",
       "id": 3
+    },
+    {
+      "email": "guest@gmail.com",
+      "password": "$2a$10$hgTAsD3wyJhez9om4J4m3OwO0ZKtoqXP6KnfnFxCKf8RxK9hftxCO",
+      "name": "guest",
+      "id": 4
     }
   ]
 }

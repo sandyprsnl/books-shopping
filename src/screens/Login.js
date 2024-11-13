@@ -11,7 +11,23 @@ const Login = () => {
     e.preventDefault();
     let data =  {};
     try {
-      data =  await loginService({email,password});
+      let uemail = email.current.value;
+      let upassword = password.current.value;
+      data =  await loginService({email:uemail,password:upassword});
+    } catch (error) {
+      showError(error.message);
+    }
+    if(data.accessToken){
+      setSessionData(data);
+      navigator('/products');
+    }else{
+      toast.error(data);
+    }
+  }
+  async function loginAsGust(){
+    let data =  {};
+    try {
+      data =  await loginService({email:'guest@gmail.com',password:"!@#$%^&*"});
     } catch (error) {
       showError(error.message);
     }
@@ -38,7 +54,7 @@ const Login = () => {
           </div>
           <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log In</button>
         </form>
-        {/* <button className="mt-3 cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login As Guest</button> */}
+         <button onClick={loginAsGust} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-3">Login As Guest</button> 
     </main>
   )
 }
